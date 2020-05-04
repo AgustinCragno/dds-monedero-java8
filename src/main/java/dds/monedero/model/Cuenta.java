@@ -11,6 +11,8 @@ import dds.monedero.exceptions.SaldoMenorException;
 
 public class Cuenta {
 
+    private static final double LIMITE_DE_EXTRACCION_DIARIO = 1000;
+
     private double saldo;
     private List<Movimiento> movimientos = new ArrayList<>();
 
@@ -44,8 +46,7 @@ public class Cuenta {
         }
 
         double montoExtraidoHoy = getMontoExtraidoA(LocalDate.now());
-        //4. Valor limite de extraccion hardcodeado, deberia ser variable de clase fija
-        double limite = 1000 - montoExtraidoHoy;
+        double limite = LIMITE_DE_EXTRACCION_DIARIO - montoExtraidoHoy;
 
         if (cuanto > limite) {
             throw new MaximoExtraccionDiarioException("No puede extraer mas de $ " + 1000
