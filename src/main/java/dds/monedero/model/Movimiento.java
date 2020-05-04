@@ -42,22 +42,4 @@ public class Movimiento {
     public boolean isExtraccion() {
         return !esDeposito;
     }
-
-    //7. No es responsabilidad de Movimiento modificar el saldo y agregarse a la coleccion
-    public void agregateA(Cuenta cuenta) {
-        cuenta.setSaldo(calcularValor(cuenta));
-        cuenta.agregarMovimiento(fecha, monto, esDeposito);
-    }
-
-    //8. No se entiende para que sirve (podria darle un mejor nombre)
-    //Ademas, no parece que le pertenezca a Movimiento
-
-    //De todas formas esta atado al metodo anterior
-    public double calcularValor(Cuenta cuenta) {
-        if (esDeposito) {
-            return cuenta.getSaldo() + getMonto();
-        } else {
-            return cuenta.getSaldo() - getMonto();
-        }
-    }
 }

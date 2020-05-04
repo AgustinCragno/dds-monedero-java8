@@ -33,8 +33,7 @@ public class Cuenta {
             throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
         }
 
-        //3. Delega la accion de agregar a la lista de movimientos al movimiento mismo, no tiene mucho sentido
-        new Movimiento(LocalDate.now(), cuanto, true).agregateA(this);
+        agregarMovimiento(LocalDate.now(), cuanto, true);
     }
 
     public void sacar(double cuanto) {
@@ -53,11 +52,12 @@ public class Cuenta {
                     + " diarios, límite: " + limite);
         }
 
-        //5. Delega la accion de agregar a la lista de movimientos al movimiento mismo
-        new Movimiento(LocalDate.now(), cuanto, false).agregateA(this);
+        agregarMovimiento(LocalDate.now(), cuanto, false);
     }
 
     public void agregarMovimiento(LocalDate fecha, double cuanto, boolean esDeposito) {
+        saldo += cuanto * (esDeposito ? 1 : -1);
+
         Movimiento movimiento = new Movimiento(fecha, cuanto, esDeposito);
         movimientos.add(movimiento);
     }
