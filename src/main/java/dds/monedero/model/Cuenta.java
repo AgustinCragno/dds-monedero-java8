@@ -11,8 +11,7 @@ import dds.monedero.exceptions.SaldoMenorException;
 
 public class Cuenta {
 
-    //1. Inicializacion en cero redundante
-    private double saldo = 0;
+    private double saldo;
     private List<Movimiento> movimientos = new ArrayList<>();
 
     public Cuenta() {
